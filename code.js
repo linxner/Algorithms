@@ -288,30 +288,30 @@ var reverseWords = function (s) {
  */
 var longestCommonPrefix = function (strs) {
   if (!strs.length) {
-      return ''
+    return ''
   }
   let long = ''
   let num = 0
   while (num <= strs[0].length - 1) {
-      let cur = strs[0].charAt(num)
-      // console.log(cur);
-      let equl = true
-      for (let i = 1; i < strs.length; i++) {
-          const element = strs[i];
-          if (element.charAt(num) !== cur) {
-              equl = false
-              break
-          } else {
-              equl = true
-          }
-      }
-      if (equl) {
-          // long += strs[0].charAt(num)
-          long = equl ? long + strs[0].charAt(num) : long
+    let cur = strs[0].charAt(num)
+    // console.log(cur);
+    let equl = true
+    for (let i = 1; i < strs.length; i++) {
+      const element = strs[i];
+      if (element.charAt(num) !== cur) {
+        equl = false
+        break
       } else {
-          break
+        equl = true
       }
-      num++;
+    }
+    if (equl) {
+      // long += strs[0].charAt(num)
+      long = equl ? long + strs[0].charAt(num) : long
+    } else {
+      break
+    }
+    num++;
   }
   return long
 };
@@ -322,18 +322,18 @@ var longestCommonPrefix = function (strs) {
  * @param {string} path
  * @return {string}
  */
-var simplifyPath = function(path) {
+var simplifyPath = function (path) {
   const stack = [];
   const pathArr = path.split('/');
-  
+
   for (let item of pathArr) {
-      if (item === '' || item === '.') {
-          continue;
-      } else if (item === '..') {
-          stack.pop();
-      } else {
-          stack.push(item);
-      }
+    if (item === '' || item === '.') {
+      continue;
+    } else if (item === '..') {
+      stack.pop();
+    } else {
+      stack.push(item);
+    }
   }
 
   return '/' + stack.join('/');
@@ -349,19 +349,19 @@ var simplifyPath = function(path) {
  */
 var findLengthOfLCIS = function (nums) {
   let len = nums.length
-  if(len<=1){
-      return len
+  if (len <= 1) {
+    return len
   }
   let result = 1
   let res = 1
-  for (let i = 0; i < len-1; i++) {
-      if (nums[i] < nums[i + 1]) {
-          res++
-      } else {
-          res = 1
-      }
-  result = result > res ? result : res
-      
+  for (let i = 0; i < len - 1; i++) {
+    if (nums[i] < nums[i + 1]) {
+      res++
+    } else {
+      res = 1
+    }
+    result = result > res ? result : res
+
   }
   return result
 };
@@ -385,19 +385,19 @@ var findKthLargest = function (nums, k) {
  */
 var longestConsecutive = function (nums) {
   let len = nums.length
-  if(len<=1){
-      return len
+  if (len <= 1) {
+    return len
   }
-  
-  let a =Array.from(new Set(nums.sort((a, b) => a - b))) 
+
+  let a = Array.from(new Set(nums.sort((a, b) => a - b)))
   let res = 1, count = 1;
-  for (let i = 0; i < len-1; i++) {
-      if (a[i] + 1 === a[i + 1]) {
-          count++;
-      } else {
-          count = 1
-      }
-      res = res > count ? res : count
+  for (let i = 0; i < len - 1; i++) {
+    if (a[i] + 1 === a[i + 1]) {
+      count++;
+    } else {
+      count = 1
+    }
+    res = res > count ? res : count
   }
   return res
 };
@@ -417,21 +417,21 @@ var longestConsecutive = function (nums) {
  * @return {ListNode}
  */
 
-var mergeTwoLists = function(l1, l2) {
-  if(l1 == null) {
-         return l2;
-     }
-     if(l2 == null) {
-         return l1;
-     }
+var mergeTwoLists = function (l1, l2) {
+  if (l1 == null) {
+    return l2;
+  }
+  if (l2 == null) {
+    return l1;
+  }
 
-     if(l1.val < l2.val) {
-         l1.next = mergeTwoLists(l1.next, l2);
-         return l1;
-     } else {
-         l2.next = mergeTwoLists(l1, l2.next);
-         return l2;
-     }
+  if (l1.val < l2.val) {
+    l1.next = mergeTwoLists(l1.next, l2);
+    return l1;
+  } else {
+    l2.next = mergeTwoLists(l1, l2.next);
+    return l2;
+  }
 
 };
 /**
@@ -439,17 +439,17 @@ var mergeTwoLists = function(l1, l2) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+var reverseList = function (head) {
   if (!head || !head.next) return head;
 
   let cur = head;
   let pre = null;
 
-  while(cur) {
-      const next = cur.next;
-      cur.next = pre;
-      pre = cur;
-      cur = next;
+  while (cur) {
+    const next = cur.next;
+    cur.next = pre;
+    pre = cur;
+    cur = next;
   }
 
   return pre;
