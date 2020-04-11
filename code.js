@@ -242,168 +242,6 @@ var checkInclusion = function (s1, s2) {
 
 // console.log(checkInclusion("prosperity", "properties"));
 /**
- * 字符串相乘
- * @param {string} num1
- * @param {string} num2
- * @return {string}
- */
-var multiply = function (num1, num2) {
-  if (num1 === "0" || num2 === "0") {
-    return "0"
-  }
-  let len1 = num1.length
-  let len2 = num2.length
-  let arr = new Array(len1 + len2 - 1).fill(0)
-  for (let i = 0; i < len1; i++) {
-    for (let j = 0; j < len2; j++) {
-      arr[i + j] += +num1[i] * +num2[j]
-    }
-  }
-  let len = len1 + len2 - 1
-  let result = '', num = 0
-  while (len--) {
-    num += arr[len]
-    result = (num % 10) + result
-    num = (num / 10) | 0
-  }
-  return num > 0 ? num + result : result
-};
-// console.log(123456789 * 987654321);
-
-/**
-* 翻转字符串里的单词
-* @param {string} s
-* @return {string}
-*/
-var reverseWords = function (s) {
-  return s.trim().split(/\s+/).reverse().join(' ')
-};
-
-// console.log(reverseWords("the  sky is blue"))
-
-/**
- * 最长公共前缀
- * @param {string[]} strs
- * @return {string}
- */
-var longestCommonPrefix = function (strs) {
-  if (!strs.length) {
-    return ''
-  }
-  let long = ''
-  let num = 0
-  while (num <= strs[0].length - 1) {
-    let cur = strs[0].charAt(num)
-    // console.log(cur);
-    let equl = true
-    for (let i = 1; i < strs.length; i++) {
-      const element = strs[i];
-      if (element.charAt(num) !== cur) {
-        equl = false
-        break
-      } else {
-        equl = true
-      }
-    }
-    if (equl) {
-      // long += strs[0].charAt(num)
-      long = equl ? long + strs[0].charAt(num) : long
-    } else {
-      break
-    }
-    num++;
-  }
-  return long
-};
-
-
-/**
- * 简化路径
- * @param {string} path
- * @return {string}
- */
-var simplifyPath = function (path) {
-  const stack = [];
-  const pathArr = path.split('/');
-
-  for (let item of pathArr) {
-    if (item === '' || item === '.') {
-      continue;
-    } else if (item === '..') {
-      stack.pop();
-    } else {
-      stack.push(item);
-    }
-  }
-
-  return '/' + stack.join('/');
-};
-
-
-
-
-/**
- * 最长连续递增序列
- * @param {number[]} nums
- * @return {number}
- */
-var findLengthOfLCIS = function (nums) {
-  let len = nums.length
-  if (len <= 1) {
-    return len
-  }
-  let result = 1
-  let res = 1
-  for (let i = 0; i < len - 1; i++) {
-    if (nums[i] < nums[i + 1]) {
-      res++
-    } else {
-      res = 1
-    }
-    result = result > res ? result : res
-
-  }
-  return result
-};
-
-
-/**
- * 数组中的第K个最大元素
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-var findKthLargest = function (nums, k) {
-  let b = nums.sort((a, b) => a - b)
-  return b[b.length - k]
-};
-
-/**
- * 最长连续序列
- * @param {number[]} nums
- * @return {number}
- */
-var longestConsecutive = function (nums) {
-  let len = nums.length
-  if (len <= 1) {
-    return len
-  }
-
-  let a = Array.from(new Set(nums.sort((a, b) => a - b)))
-  let res = 1, count = 1;
-  for (let i = 0; i < len - 1; i++) {
-    if (a[i] + 1 === a[i + 1]) {
-      count++;
-    } else {
-      count = 1
-    }
-    res = res > count ? res : count
-  }
-  return res
-};
-// console.log(longestConsecutive([1, 2, 0, 1]));
-
-/**
  * Definition for singly-linked list.
  * function ListNode(val) {
  *     this.val = val;
@@ -411,46 +249,19 @@ var longestConsecutive = function (nums) {
  * }
  */
 /**
- * 合并两个有序链表
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
-
-var mergeTwoLists = function (l1, l2) {
-  if (l1 == null) {
-    return l2;
-  }
-  if (l2 == null) {
-    return l1;
-  }
-
-  if (l1.val < l2.val) {
-    l1.next = mergeTwoLists(l1.next, l2);
-    return l1;
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
+}
+var addTwoNumbers = function (l1, l2) {
+  let res
+  if (l1.val + l2.val > 9) {
+    res.val = new ListNode(Math.floor((l1.val + l2.val) / 10))
   } else {
-    l2.next = mergeTwoLists(l1, l2.next);
-    return l2;
+    res.val = l1.val + l2.val
   }
-
-};
-/**
- * 反转链表
- * @param {ListNode} head
- * @return {ListNode}
- */
-var reverseList = function (head) {
-  if (!head || !head.next) return head;
-
-  let cur = head;
-  let pre = null;
-
-  while (cur) {
-    const next = cur.next;
-    cur.next = pre;
-    pre = cur;
-    cur = next;
-  }
-
-  return pre;
 };
