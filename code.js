@@ -288,30 +288,30 @@ var reverseWords = function (s) {
  */
 var longestCommonPrefix = function (strs) {
   if (!strs.length) {
-      return ''
+    return ''
   }
   let long = ''
   let num = 0
   while (num <= strs[0].length - 1) {
-      let cur = strs[0].charAt(num)
-      // console.log(cur);
-      let equl = true
-      for (let i = 1; i < strs.length; i++) {
-          const element = strs[i];
-          if (element.charAt(num) !== cur) {
-              equl = false
-              break
-          } else {
-              equl = true
-          }
-      }
-      if (equl) {
-          // long += strs[0].charAt(num)
-          long = equl ? long + strs[0].charAt(num) : long
+    let cur = strs[0].charAt(num)
+    // console.log(cur);
+    let equl = true
+    for (let i = 1; i < strs.length; i++) {
+      const element = strs[i];
+      if (element.charAt(num) !== cur) {
+        equl = false
+        break
       } else {
-          break
+        equl = true
       }
-      num++;
+    }
+    if (equl) {
+      // long += strs[0].charAt(num)
+      long = equl ? long + strs[0].charAt(num) : long
+    } else {
+      break
+    }
+    num++;
   }
   return long
 };
@@ -322,18 +322,18 @@ var longestCommonPrefix = function (strs) {
  * @param {string} path
  * @return {string}
  */
-var simplifyPath = function(path) {
+var simplifyPath = function (path) {
   const stack = [];
   const pathArr = path.split('/');
-  
+
   for (let item of pathArr) {
-      if (item === '' || item === '.') {
-          continue;
-      } else if (item === '..') {
-          stack.pop();
-      } else {
-          stack.push(item);
-      }
+    if (item === '' || item === '.') {
+      continue;
+    } else if (item === '..') {
+      stack.pop();
+    } else {
+      stack.push(item);
+    }
   }
 
   return '/' + stack.join('/');
@@ -349,19 +349,19 @@ var simplifyPath = function(path) {
  */
 var findLengthOfLCIS = function (nums) {
   let len = nums.length
-  if(len<=1){
-      return len
+  if (len <= 1) {
+    return len
   }
   let result = 1
   let res = 1
-  for (let i = 0; i < len-1; i++) {
-      if (nums[i] < nums[i + 1]) {
-          res++
-      } else {
-          res = 1
-      }
-  result = result > res ? result : res
-      
+  for (let i = 0; i < len - 1; i++) {
+    if (nums[i] < nums[i + 1]) {
+      res++
+    } else {
+      res = 1
+    }
+    result = result > res ? result : res
+
   }
   return result
 };
@@ -385,19 +385,19 @@ var findKthLargest = function (nums, k) {
  */
 var longestConsecutive = function (nums) {
   let len = nums.length
-  if(len<=1){
-      return len
+  if (len <= 1) {
+    return len
   }
-  
-  let a =Array.from(new Set(nums.sort((a, b) => a - b))) 
+
+  let a = Array.from(new Set(nums.sort((a, b) => a - b)))
   let res = 1, count = 1;
-  for (let i = 0; i < len-1; i++) {
-      if (a[i] + 1 === a[i + 1]) {
-          count++;
-      } else {
-          count = 1
-      }
-      res = res > count ? res : count
+  for (let i = 0; i < len - 1; i++) {
+    if (a[i] + 1 === a[i + 1]) {
+      count++;
+    } else {
+      count = 1
+    }
+    res = res > count ? res : count
   }
   return res
 };
@@ -411,27 +411,26 @@ var longestConsecutive = function (nums) {
  * }
  */
 /**
- * 合并两个有序链表
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
 
-var mergeTwoLists = function(l1, l2) {
-  if(l1 == null) {
-         return l2;
-     }
-     if(l2 == null) {
-         return l1;
-     }
+var mergeTwoLists = function (l1, l2) {
+  if (l1 == null) {
+    return l2;
+  }
+  if (l2 == null) {
+    return l1;
+  }
 
-     if(l1.val < l2.val) {
-         l1.next = mergeTwoLists(l1.next, l2);
-         return l1;
-     } else {
-         l2.next = mergeTwoLists(l1, l2.next);
-         return l2;
-     }
+  if (l1.val < l2.val) {
+    l1.next = mergeTwoLists(l1.next, l2);
+    return l1;
+  } else {
+    l2.next = mergeTwoLists(l1, l2.next);
+    return l2;
+  }
 
 };
 /**
@@ -439,18 +438,161 @@ var mergeTwoLists = function(l1, l2) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+var reverseList = function (head) {
   if (!head || !head.next) return head;
 
   let cur = head;
   let pre = null;
 
-  while(cur) {
-      const next = cur.next;
-      cur.next = pre;
-      pre = cur;
-      cur = next;
+  while (cur) {
+    const next = cur.next;
+    cur.next = pre;
+    pre = cur;
+    cur = next;
   }
+<<<<<<< HEAD
+};
+
+
+/**
+ * 回文数
+ * @param {number} x
+ * @return {boolean}
+ */
+//解法一
+var isPalindrome = function (x) {
+  let a = x + ''
+  let len = a.length
+  if (len <= 1) {
+    return true
+  }
+  let res = ''
+  for (let i = len - 1; i >= 0; i--) {
+    res += a.charAt(i)
+  }
+  return res === a
+};
+//解法二
+var isPalindrome = function (x) {
+  let s = 0;
+  let y = 0;
+  s = x;
+  while (s >= 1) {
+    y = y * 10 + s % 10;
+    s = Math.floor(s / 10)
+  }
+  return y == x;
+}
+// console.log(isPalindrome(12231));
+
+/**
+ * 删除排序数组中的重复项
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function (nums) {
+  let index = 0
+  for (let i = 0, len = nums.length; i < len; i++) {
+    if (nums[i] != nums[i + 1]) {
+      nums[index] = nums[i]
+      index++
+    }
+  }
+  return index
+};
+// console.log(removeDuplicates([1,1,2]));
+//输出2-32中不重复的5个数
+let arr = [], obj = {}
+function getRandom() { return 2 + Math.floor(Math.random() * 31) }
+function pushArr(a) {
+  if (obj[a] === undefined) {
+    if (arr.length < 5) {
+      arr.push(a)
+      obj[a] = true
+      pushArr(getRandom())
+    }
+  } else {
+    pushArr(getRandom())
+  }
+}
+pushArr(getRandom())
+// console.log(arr);
+
+
+//在无限的整数序列 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...中找到第 n 个数字。
+var findNthDigit = function (n) {
+  if (n < 10) return n;
+  let i = 1, sum = 9
+  while (n > sum) {
+    sum += 9 * Math.pow(10, i) * (i + 1)
+    i++;
+  }
+  let res = Math.pow(10, i) - Math.floor((sum - n) / i) - 1
+  // console.log(Math.round(3 * (1 - ((sum - n) / 3 - Math.floor((sum - n) / 3)))));
+  console.log(res, sum);
+  let num = Math.round(i * (1 - ((sum - n) / i - Math.floor((sum - n) / i))))
+  console.log(num);
+
+  return Number(res.toString()[num - 1])
+};
+
+// console.log(findNthDigit(1001))
+
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function (s) {
+  let roman = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+  let len = s.length
+  let curIndex = 0;
+  let res = 0
+  for (let i = len - 1; i >= 0; i--) {
+    let ele = s[i]
+    let index = roman.indexOf(ele)
+    // console.log(ele)
+    if (index >= curIndex) {
+      res += toInt(ele)
+    } else {
+      res -= toInt(ele)
+    }
+    curIndex = index
+    // console.log(curIndex)
+  }
+  return res
+};
+
+//罗马数字转整数
+function toInt(e) {
+  let res;
+  switch (e) {
+    case 'I':
+      res = 1
+      break;
+    case 'V':
+      res = 5
+      break;
+    case 'X':
+      res = 10
+      break;
+    case 'L':
+      res = 50
+      break;
+    case 'C':
+      res = 100
+      break;
+    case 'D':
+      res = 500
+      break;
+    case 'M':
+      res = 1000
+      break;
+  }
+  return res
+}
+=======
 
   return pre;
 };
+>>>>>>> refs/remotes/origin/master
